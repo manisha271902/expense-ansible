@@ -1,6 +1,8 @@
 - name: database yaml file
   hosts: db
   become: yes
+  vars:
+    login_host: db.manisha.fun
   tasks:
   - name: install Mysql server
     ansible.builtin.dnf:
@@ -24,7 +26,7 @@
     community.mysql.mysql_info:
       login_user: root
       login_password: ExpenseApp@1
-      login_host: db
+      login_host: "{{login_host}}"
       filter: version #version kuda check cehsthunam , install ayi unte version  ostadi ga
       ignore_errors: yes #first time run chesinapuyd errro ostadi kabbti ignore cheyalui annd
       register: mysql_connection_output
