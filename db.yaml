@@ -30,7 +30,7 @@
       register: mysql_connection_output
   - name: print o/p
     ansible.builtin.debug:
-      msg: "{{mysql_connection_output}}"
+      msg: "Output: {{mysql_connection_output}}"
   
 
       
