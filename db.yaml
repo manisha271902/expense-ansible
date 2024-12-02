@@ -28,7 +28,9 @@
       filter: version #version kuda check cehsthunam , install ayi unte version  ostadi ga
       ignore_errors: true #first time run chesinapuyd errro ostadi kabbti ignore cheyalui annd
       register: mysql_connection_output
-
+  - name: print o/p
+    ansible.builtin.debug:
+      msg: "{{mysql_connection_output}}"
   
 
       
