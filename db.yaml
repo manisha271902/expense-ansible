@@ -7,11 +7,11 @@
       name: mysql_server
       state: latest
   - name: Start MYSQL service
-    ansible.buitin.service:
+    ansible.builtin.service:
       name: mysqld
       state: started
   - name: Enable MYSQL service
-    ansible.buitin.service:
+    ansible.builtin.service:
       name: mysqld
       enabled: yes
 
