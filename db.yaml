@@ -1,0 +1,34 @@
+- name: database yaml file
+  hosts: db
+  become: yes
+  tasks:
+  - name: install Mysql server
+    ansible.buitin.dnf:
+      name: mysql_server
+      state: latest
+  - name: Start MYSQL service
+    ansible.buitin.service:
+      name: mysqld
+      state: started
+  - name: Enable MYSQL service
+    ansible.buitin.service:
+      name: mysqld
+      enabled: yes
+
+#next setting up the root passowrd. malli malli run chesinapud ante set chesnapud error ostadi. SO atla rakunda, check if password is already setu or not
+#ansible mysql module untadi, community vallu develpop chesar mysql db, mysql_info module ivi use cheyochu
+
+#check if db password is already setup or not, first manam connectio  teskogalguthunama ledha ani check chesthunbam , conection ayindhi ante already set chesi uynate ga
+
+  - name: check DB Connection
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: ExpenseApp@1
+      login_host: db
+      filter: version #version kuda check cehsthunam , install ayi unte version  ostadi ga
+      ignore_errors: true #first time run chesinapuyd errro ostadi kabbti ignore cheyalui annd
+      register: mysql_connection_output
+
+  
+
+      
