@@ -21,6 +21,13 @@
       name: mysqld
       enabled: yes
 
+  - name: install python mysql dependencies
+    ansible.builtin.pip:
+      name:
+      - PyMySQL
+      - cryptography
+      executable: pip3.9 # pip3.11 if python version is 3.11
+
 #next setting up the root passowrd. malli malli run chesinapud ante set chesnapud error ostadi. SO atla rakunda, check if password is already setu or not
 #ansible mysql module untadi, community vallu develpop chesar mysql db, mysql_info module ivi use cheyochu
 
