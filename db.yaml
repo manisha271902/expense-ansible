@@ -3,6 +3,10 @@
   become: yes
   vars:
     login_host: db.manisha.fun
+  vars_prompt:
+  - name: mysql_root_password
+    prompt: please enter MySQL root password
+    private: no
   tasks:
   - name: install Mysql server
     ansible.builtin.dnf:
@@ -25,11 +29,11 @@
   - name: check DB Connection
     community.mysql.mysql_info:
       login_user: root
-      login_password: ExpenseApp@1
+      login_password: "{{mysql_root_password}}"
       login_host: "{{login_host}}"
       filter: version #version kuda check cehsthunam , install ayi unte version  ostadi ga
-      ignore_errors: yes #first time run chesinapuyd errro ostadi kabbti ignore cheyalui annd
-      register: mysql_connection_output
+    ignore_errors: yes #first time run chesinapuyd errro ostadi kabbti ignore cheyalui annd
+    register: mysql_connection_output
   - name: print o/p
     ansible.builtin.debug:
       msg: "Output: {{mysql_connection_output}}"
