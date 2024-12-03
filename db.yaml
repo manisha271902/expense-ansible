@@ -21,6 +21,10 @@
       name: mysqld
       enabled: yes
 
+
+#ansible python lo develop ayindhi kabatti, ansible nundi mysql connect avvalante, ansible ki ee libraries kavali
+#ex laptop ki keymoard/mouse connect avvadaniki we need drivers. Same scripting language ki kuda vere vatiki connect avthunapud
+#we need drivers , vatine libraries antam. SO below libraries install cheyali
   - name: install python mysql dependencies
     ansible.builtin.pip:
       name:
