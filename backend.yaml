@@ -24,8 +24,14 @@
     ansible.builtin.get_url:
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /tmp/backend.zip
-  - name: Unarchive a file that is already on the remote machine
+  - name: unzip backend code
     ansible.builtin.unarchive:
       src: /tmp/backend.zip # by default checks in ansible server
       dest: /app
       remote_src: yes
+  - name: install npm dependancies
+    ansible.builtin.command:
+      npm install
+      args:         #paina command run chese mundhi ee directory ki change avvu ani ansible ki chepthunam manam. And pakage.json ekada untado akade npm install run aytadi
+        chdir: /app
+  
