@@ -20,12 +20,12 @@
     ansible.builtin.file:   
       path: /app
       state: directory
-  # - name: Download the application code to created app directory.
-  #   ansible.builtin.command:   
-  #     curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-  #     cd /app
-  #     unzip /tmp/backend.zip
-  #     cd /app
-  #     npm install
-
-  
+ - name: Download code
+   ansible.builtin.get_url:
+    url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+    dest: /tmp/backend.zip
+ - name: Unarchive a file that is already on the remote machine
+   ansible.builtin.unarchive:
+    src: /tmp/backend.zip # by default checks in ansible server
+    dest: /app
+    remote_src: yes
