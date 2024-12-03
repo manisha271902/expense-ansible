@@ -32,6 +32,6 @@
   - name: install npm dependancies
     ansible.builtin.command:
       npm install
-      args:         #paina command run chese mundhi ee directory ki change avvu ani ansible ki chepthunam manam. And pakage.json ekada untado akade npm install run aytadi
-        chdir: /app
+    args:         #paina command run chese mundhi ee directory ki change avvu ani ansible ki chepthunam manam. And pakage.json ekada untado akade npm install run aytadi
+      chdir: /app
   
