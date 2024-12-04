@@ -53,7 +53,8 @@
       - cryptography
       executable: pip3.9 # pip3.11 if python version is 3.11
   - name: Establish connection  and import mysql data
-    ansible.builtin.mysql_db:
+    community.mysql.mysql_db:
+      name: all #name=all may only be provided if state is dump or import.
       login_user: root
       login_password: "{{login_password}}"
       login_host: "{{login_host}}"   
