@@ -13,7 +13,7 @@
       dnf module enable nodejs:20 -y
   - name: install nodejs
     ansible.builtin.dnf:
-      name: "{{item}}"
+      name: "{{ item }}"
       state: latest
       loop:
       - nodejs
