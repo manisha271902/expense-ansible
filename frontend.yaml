@@ -39,7 +39,7 @@
     ansible.builtin.unarchive:
       src: /usr/share/nginx/html/expense-frontend-v2.zip # by default checks in ansible server
       dest: /usr/share/nginx/html
-      remote_src: yes
+      # remote_src: yes
 
   - name: Copy expense.conf
     ansible.builtin.copy:
