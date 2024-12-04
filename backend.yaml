@@ -1,6 +1,9 @@
 - name: list all the modules
   hosts: backend
   become: yes
+  vars:
+    login_host: db.manisha.fun
+    login_password: ExpenseApp@1
   tasks:
   - name: disable default nodejs
     ansible.builtin.command:
@@ -10,8 +13,11 @@
       dnf module enable nodejs:20 -y
   - name: install nodejs
     ansible.builtin.dnf:
-      name: nodejs
+      name: {{item}}}
       state: latest
+      loop:
+      - nodejs
+      - mysql
   - name: create user
     ansible.builtin.user:
       name: expense
@@ -34,4 +40,23 @@
       npm install
     args:         #paina command run chese mundhi ee directory ki change avvu ani ansible ki chepthunam manam. And pakage.json ekada untado akade npm install run aytadi
       chdir: /app
-  
+
+    #local nundi remote server lo ee loc lo copy chestaid
+  - name: copy backend service
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+  - name: install python mysql dependencies
+    ansible.builtin.pip:
+      name:
+      - PyMySQL    #to connect mysql db from ansible
+      - cryptography
+      executable: pip3.9 # pip3.11 if python version is 3.11
+  - name: Establish connection  and import mysql data
+    ansible.builtin.mysql_db:
+      login_user: root
+      login_password: "{{login_password}}"
+      login_host: "{{login_host}}"   
+  #paina varak connection establish aytadi, now dump/import data
+      target: /app/schema/backend.sql
+      state: dump
